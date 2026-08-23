@@ -1,4 +1,4 @@
-name: Build Android App
+  name: Build Android App
 
 on:
   push:
@@ -18,10 +18,13 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Build with Gradle
-      run: chmod +x gradlew && ./gradlew assembleDebug
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
 
-    - name: Upload APK Artifact
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug
+
+    - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: app-debug
